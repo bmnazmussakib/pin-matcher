@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input class="form-control" id="displayPin" type="text">
+                    <button class="generate-btn" id="generateBtn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <form class="input-section half-width" name="calculator">
+                    <input class="form-control" id="calc-display" name="display" type="text">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                                <input type="button" class="button" class="button" value="7" onclick="calculator.display.value += '7'">
+                                <input type="button" class="button" class="button" value="8" onclick="calculator.display.value += '8'">
+                                <input type="button" class="button" class="button" value="9" onclick="calculator.display.value += '9'">
+                            </div>
+                            <div class="calc-button-row">
+                                <input type="button" class="button" value="4" onclick="calculator.display.value += '4'">
+                                <input type="button" class="button" value="5" onclick="calculator.display.value += '5'">
+                                <input type="button" class="button" value="6" onclick="calculator.display.value += '6'">
+                            </div>
+                            <div class="calc-button-row">
+                                <input type="button" class="button" value="1" onclick="calculator.display.value += '1'">
+                                <input type="button" class="button" value="2" onclick="calculator.display.value += '2'">
+                                <input type="button" class="button" value="3" onclick="calculator.display.value += '3'">
+                            </div>
+                            <div class="calc-button-row">
+                                <input type="button" class="button" value="<" onclick="calculator.display.value = calculator.display.value.slice(0,-1)">
+                                <input type="button" class="button" value="0" onclick="calculator.display.value += '0'">
+                                <input type="button" class="button" value="C" onclick="calculator.display.value = ''">
+                            </div>
+                            <div>
+                                <button type="submit" class="submit-btn" id="submit-Btn">Submit</button>
+                                <p class="action-left">3 try left</p>
+                            </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p class="notify" id="wrongPin">❌ Pin Didn't Match, Please try again</p>
+            <p class="notify" id="correctPin">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+
+
+
+    <script>
+      // Generate Pin Button Event Listener
+        
+        var generateBtn = document.getElementById("generateBtn");
+        generateBtn.addEventListener('click',function(){
+           
+            // Function to generate random number  
+            function randomNumber(min, max) {  
+                return Math.random() * (max - min) + min; 
+            }  
+            document.getElementById("displayPin").value = Math.round(randomNumber(1000, 9999));  
+        })
+
+        //Submit BUtton Event Handler
+
+        var submitBtn = document.getElementById("submit-Btn");
+        submitBtn.addEventListener('click',function(){
+
+            var pinDisplay = document.getElementById("displayPin").value;
+            var calcDisplay = document.getElementById("calc-display").value;
+            var correctPin = document.getElementById("correctPin");
+            var wrongPin = document.getElementById("wrongPin");
+
+            if(calcDisplay == pinDisplay){
+                correctPin.style.display = "block";    
+            }
+            if(calcDisplay !== pinDisplay){
+                wrongPin.style.display = "block";   
+            }
+
+        })
+        
+
+    </script>
+</body>
+</html>
